@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
-import { Header } from "semantic-ui-react";
+import { Header, Image } from "semantic-ui-react";
 import axios from "axios";
 import Loadingicon from "../Components/Loadingicon";
 import MessageLoader from "../Components/MessageLoader";
@@ -8,7 +8,7 @@ const PostDetail = () => {
   const [loading, setLoading] = useState(false);
   const [post, setPost] = useState(null);
   const [error, setError] = useState(null);
-  const {postSlug} = useParams();
+  const { postSlug } = useParams();
   console.log(postSlug);
 
   useEffect(() => {
@@ -30,13 +30,21 @@ const PostDetail = () => {
   }, []);
   return (
     <div>
-      <Header>{post && post.title}</Header>
-      {error && <MessageLoader negative message={error} />}
       {loading && <Loadingicon />}
+      {error && <MessageLoader negative message={error} />}
       {post && (
-          <p>
-              {post.content}
-          </p>
+        <div>
+          <Image src={post.thumbnail}></Image>
+          <Header as="h1">{post && post.title}</Header>
+          <strong style={{float:"right"}}>
+            <small>
+              Last Updated:
+              {`${new Date(post.last_updated).toLocaleDateString()} ${new Date(post.last_updated).toLocaleTimeString()}`}
+            </small>
+          </strong>
+          <br />
+          {post.content}
+        </div>
       )}
     </div>
   );
