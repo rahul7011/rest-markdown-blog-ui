@@ -1,10 +1,13 @@
 import axios from "axios";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { Header, Form, Button } from "semantic-ui-react";
 import { history } from "../helpers/history";
 import { api } from "../api";
 import MessageLoader from "../Components/MessageLoader";
-import Loadingicon from "../Components/Loadingicon";
+import MarkdownIt from "markdown-it";
+import MdEditor from "react-markdown-editor-lite";
+import "react-markdown-editor-lite/lib/index.css";
+
 const PostCreate = () => {
   const [loading, setLoading] = useState(null);
   const [error, setError] = useState(null);
@@ -14,18 +17,16 @@ const PostCreate = () => {
   const [markdown, setMarkdown] = useState("");
   const [thumbnail, setThumbnail] = useState("");
 
+  const mdParser = new MarkdownIt(/* Markdown-it options */);
   function handlesubmit(e) {
     setLoading(true);
     e.preventDefault();
-    console.log(title);
-    console.log(markdown);
-    console.log(thumbnail);
 
     const formData = new FormData();
     formData.append("thumbnail", thumbnail);
     formData.append("title", title);
     formData.append("content", markdown);
-    // console.log(formData)
+
     axios
       .post(api.posts.create, formData, {
         headers: {
@@ -34,17 +35,15 @@ const PostCreate = () => {
         },
       })
       .then((res) => {
-        console.log(res);
         setLoading(false);
         history.push("/posts");
       })
       .catch((err) => {
-        console.log(err);
         setError(err.message || err);
         setLoading(false);
       });
   }
-  
+
   return (
     <div>
       <Header>PostCreate</Header>
@@ -61,12 +60,12 @@ const PostCreate = () => {
             onChange={(e) => setTitle(e.target.value)}
           />
         </Form.Field>
-        <Form.TextArea
-          label="Markdown Content"
-          placeholder="Enter Content"
-          value={markdown}
-          onChange={(e) => setMarkdown(e.target.value)}
+        <MdEditor
+          style={{ height: "500px" }}
+          renderHTML={(text) => mdParser.render(text)}
+          onChange={({ text }) => setMarkdown(text)}
         />
+
         <Form.Field>
           <Button
             type="button"

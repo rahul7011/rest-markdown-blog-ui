@@ -1,7 +1,6 @@
-import axios from "axios";
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { NavLink } from "react-router-dom";
-import { Header, Icon, Divider, Item, Message } from "semantic-ui-react";
+import { Header, Divider, Item } from "semantic-ui-react";
 import { api } from "../api";
 import Loadingicon from "../Components/Loadingicon";
 import MessageLoader from "../Components/MessageLoader";

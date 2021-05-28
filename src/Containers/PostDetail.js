@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useParams } from "react-router";
 import { Header, Image } from "semantic-ui-react";
-import axios from "axios";
 import Loadingicon from "../Components/Loadingicon";
 import MessageLoader from "../Components/MessageLoader";
 import {api} from "../api";
