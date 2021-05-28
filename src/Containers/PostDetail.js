@@ -4,6 +4,7 @@ import { Header, Image } from "semantic-ui-react";
 import axios from "axios";
 import Loadingicon from "../Components/Loadingicon";
 import MessageLoader from "../Components/MessageLoader";
+import {api} from "../api";
 const PostDetail = () => {
   const [loading, setLoading] = useState(false);
   const [post, setPost] = useState(null);
@@ -16,7 +17,7 @@ const PostDetail = () => {
       setLoading(true);
       try {
         const response = await axios.get(
-          `http://127.0.0.1:8000/api/posts/${postSlug}`
+          api.posts.retrieve(postSlug)
         );
         console.log(response.data);
         setPost(response.data);

@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { Header, Icon, Divider, Item, Message } from "semantic-ui-react";
+import { api } from "../api";
 import Loadingicon from "../Components/Loadingicon";
 import MessageLoader from "../Components/MessageLoader";
 const PostList = () => {
@@ -13,7 +14,7 @@ const PostList = () => {
     async function fetchData() {
       setLoading(true);
       try {
-        const response = await axios.get("http://127.0.0.1:8000/api/posts/");
+        const response = await axios.get(api.posts.list);
         console.log(response.data);
         setPosts(response.data);
         setLoading(false);

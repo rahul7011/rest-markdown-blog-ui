@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import { Header, Form, Button } from "semantic-ui-react";
 import { history } from "../helpers/history";
+import { api } from "../api";
 import MessageLoader from "../Components/MessageLoader";
 import Loadingicon from "../Components/Loadingicon";
 const PostCreate = () => {
@@ -26,7 +27,7 @@ const PostCreate = () => {
     formData.append("content", markdown);
     // console.log(formData)
     axios
-      .post("http://127.0.0.1:8000/api/posts/create/", formData, {
+      .post(api.posts.create, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: "Token 8db098e5de5cd35f7cba9bca44bb680547cb3ad5",
