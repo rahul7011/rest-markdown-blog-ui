@@ -44,7 +44,7 @@ const PostCreate = () => {
         setLoading(false);
       });
   }
-
+  
   return (
     <div>
       <Header>PostCreate</Header>

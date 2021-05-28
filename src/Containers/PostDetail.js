@@ -5,46 +5,26 @@ import axios from "axios";
 import Loadingicon from "../Components/Loadingicon";
 import MessageLoader from "../Components/MessageLoader";
 import {api} from "../api";
+import useFetch from "../helpers/hooks";
 const PostDetail = () => {
-  const [loading, setLoading] = useState(false);
-  const [post, setPost] = useState(null);
-  const [error, setError] = useState(null);
   const { postSlug } = useParams();
-  console.log(postSlug);
-
-  useEffect(() => {
-    async function fetchData() {
-      setLoading(true);
-      try {
-        const response = await axios.get(
-          api.posts.retrieve(postSlug)
-        );
-        console.log(response.data);
-        setPost(response.data);
-        setLoading(false);
-      } catch (error) {
-        setError(error);
-        setLoading(false);
-      }
-    }
-    fetchData();
-  }, []);
+  const {data,loading,error} = useFetch(api.posts.retrieve(postSlug))
   return (
     <div>
       {loading && <Loadingicon />}
       {error && <MessageLoader negative message={error} />}
-      {post && (
+      {data && (
         <div>
-          <Image src={post.thumbnail}></Image>
-          <Header as="h1">{post && post.title}</Header>
+          <Image src={data.thumbnail}></Image>
+          <Header as="h1">{data && data.title}</Header>
           <strong style={{float:"right"}}>
             <small>
               Last Updated:
-              {`${new Date(post.last_updated).toLocaleDateString()} ${new Date(post.last_updated).toLocaleTimeString()}`}
+              {`${new Date(data.last_updated).toLocaleDateString()} ${new Date(data.last_updated).toLocaleTimeString()}`}
             </small>
           </strong>
           <br />
-          {post.content}
+          {data.content}
         </div>
       )}
     </div>

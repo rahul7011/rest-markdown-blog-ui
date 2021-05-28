@@ -5,27 +5,9 @@ import { Header, Icon, Divider, Item, Message } from "semantic-ui-react";
 import { api } from "../api";
 import Loadingicon from "../Components/Loadingicon";
 import MessageLoader from "../Components/MessageLoader";
+import useFetch from "../helpers/hooks";
 const PostList = () => {
-  const [loading, setLoading] = useState(false);
-  const [posts, setPosts] = useState(null);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    async function fetchData() {
-      setLoading(true);
-      try {
-        const response = await axios.get(api.posts.list);
-        console.log(response.data);
-        setPosts(response.data);
-        setLoading(false);
-      } catch (error) {
-        setError(error);
-        setLoading(false);
-      }
-    }
-    fetchData();
-  }, []);
-
+  const { data, loading, error } = useFetch(api.posts.list);
   return (
     <div>
       <Header>PostList</Header>
@@ -33,7 +15,7 @@ const PostList = () => {
         <Divider />
         {error && <MessageLoader negative message={error} />}
         {loading && <Loadingicon />}
-        {posts?.map((post) => {
+        {data?.map((post) => {
           return (
             <Item key={post.id}>
               <Item.Image size="small" src={post.thumbnail} />
