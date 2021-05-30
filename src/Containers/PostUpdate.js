@@ -32,7 +32,11 @@ const PostUpdateForm = ({
     e.preventDefault();
 
     const formData = new FormData();
-    formData.append("thumbnail", thumbnail);
+    if (thumbnail)
+    {
+        //we are checking if thumbnail is not null,if not null then update with the new one.
+        formData.append("thumbnail", thumbnail);
+    }
     formData.append("title", title);
     formData.append("content", markdown);
 
@@ -57,6 +61,9 @@ const PostUpdateForm = ({
     <div>
       <Header>PostUpdate</Header>
       {error && <MessageLoader negative message={error} />}
+      {thumbnail && (
+        <MessageLoader info message={`Selected Image:${thumbnail.name}`} />
+      )}
       {CurrentThumbnail && <Image src={CurrentThumbnail} size="small" />}
       <Divider />
       <Form onSubmit={handlesubmit}>

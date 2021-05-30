@@ -36,7 +36,7 @@ const PostCreate = () => {
       })
       .then((res) => {
         setLoading(false);
-        history.push("/posts");
+        history.push("/");
       })
       .catch((err) => {
         setError(err.message || err);
