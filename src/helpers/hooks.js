@@ -1,7 +1,10 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
+import authAxios, {
+  AuthenticationService,
+} from "../Services/AuthenticationServices";
 
-function useFetch(url, initialState=null) {
+function useFetch(url, initialState = null) {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -10,7 +13,11 @@ function useFetch(url, initialState=null) {
     async function fetchData() {
       setLoading(true);
       try {
-        const response = await axios.get(url);
+        let ax = axios;
+        if (AuthenticationService.isAuthenticated) {
+          ax = authAxios;
+        }
+        const response = await ax.get(url);
         console.log(response.data);
         setData(response.data);
         setLoading(false);

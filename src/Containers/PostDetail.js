@@ -1,16 +1,16 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router";
 import { Button, Divider, Header, Image, Modal } from "semantic-ui-react";
 import Loadingicon from "../Components/Loadingicon";
 import MessageLoader from "../Components/MessageLoader";
 import { api } from "../api";
-import {history} from "../helpers/history";
+import { history } from "../helpers/history";
 import useFetch from "../helpers/hooks";
-import ReactMarkdown from 'react-markdown'
+import ReactMarkdown from "react-markdown";
 import authAxios from "../Services/AuthenticationServices";
+import { NavLink } from "react-router-dom";
 
-function DeleteModal({ title, thumbnail,postSlug}) {
-
+function DeleteModal({ title, thumbnail, postSlug }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -18,7 +18,7 @@ function DeleteModal({ title, thumbnail,postSlug}) {
     setLoading(true);
 
     authAxios
-      .delete(api.posts.delete(postSlug),{
+      .delete(api.posts.delete(postSlug), {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -32,8 +32,6 @@ function DeleteModal({ title, thumbnail,postSlug}) {
         setLoading(false);
       });
   }
-
-
 
   const [open, setOpen] = React.useState(false);
   return (
@@ -92,15 +90,20 @@ const PostDetail = () => {
             </small>
           </strong>
           <br />
-          <ReactMarkdown>
-          {data.content}
-          </ReactMarkdown>
-          <Divider />
-          <DeleteModal
-            title={data.title}
-            thumbnail={data.thumbnail}
-            postSlug={postSlug}
-          ></DeleteModal>
+          <ReactMarkdown>{data.content}</ReactMarkdown>
+          {data.is_author && (
+            <>
+              <Divider />
+              <NavLink to={`/posts/${postSlug}/update`}>
+                <Button color="yellow">Update</Button>
+              </NavLink>
+              <DeleteModal
+                title={data.title}
+                thumbnail={data.thumbnail}
+                postSlug={postSlug}
+              ></DeleteModal>
+            </>
+          )}
         </div>
       )}
     </div>
