@@ -9,6 +9,7 @@ import PostUpdate from "./Containers/PostUpdate";
 import {history} from "./helpers/history"
 import Login from "./Containers/Login";
 import Signup from "./Containers/Signup";
+import PrivateRoute from "./Components/PrivateRoute";
 
 function App() {
   return (
@@ -16,7 +17,7 @@ function App() {
       <Layout>
         <Switch>
           <Route exact path="/" component={PostList} />
-          <Route path="/create" component={PostCreate} />
+          <PrivateRoute path="/create" component={PostCreate} />
           <Route exact path="/posts/:postSlug" component={PostDetail} />
           <Route path="/posts/:postSlug/update" component={PostUpdate} />
           <Route path="/login" component={Login} />
