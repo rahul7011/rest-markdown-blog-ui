@@ -8,6 +8,7 @@ import PostCreate from "./Containers/PostCreate";
 import PostUpdate from "./Containers/PostUpdate";
 import {history} from "./helpers/history"
 import Login from "./Containers/Login";
+import Signup from "./Containers/Signup";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route exact path="/posts/:postSlug" component={PostDetail} />
           <Route path="/posts/:postSlug/update" component={PostUpdate} />
           <Route path="/login" component={Login} />
+          <Route path="/signup" component={Signup} />
           
         </Switch>
       </Layout>

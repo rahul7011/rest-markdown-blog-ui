@@ -5,7 +5,8 @@ const baseURL =
 //for get method only and  not post
 export const api = {
   auth: {
-      login:`${baseURL}/dj-rest-auth/login/`
+    login: `${baseURL}/dj-rest-auth/login/`,
+    register: `${baseURL}/dj-rest-auth/registration/`,
   },
   posts: {
     list: `${baseURL}/api/posts/`,

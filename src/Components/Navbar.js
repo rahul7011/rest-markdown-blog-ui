@@ -35,6 +35,9 @@ const Navbar = () => {
               <NavLink to="/login">
                 <Menu.Item as="li">logIn</Menu.Item>
               </NavLink>
+              <NavLink to="/signup">
+                <Menu.Item as="li">SignUp</Menu.Item>
+              </NavLink>
             </>
           )}
         </Container>

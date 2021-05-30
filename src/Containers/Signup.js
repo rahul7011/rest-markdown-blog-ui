@@ -5,9 +5,10 @@ import MessageLoader from "../Components/MessageLoader";
 import { history } from "../helpers/history";
 import { AuthenticationService } from "../Services/AuthenticationServices";
 
-function Login() {
+function Signup() {
   const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [password1, setPassword1] = useState("");
+  const [password2, setPassword2] = useState("")
   const [email, setEmail] = useState("");
 
   const [loading, setLoading] = useState(false);
@@ -16,13 +17,13 @@ function Login() {
   const handlesubmit = (e) => {
     setLoading(true);
     e.preventDefault();
-    AuthenticationService.login({username,email,password})
+    AuthenticationService.SignUp({username,email,password1,password2})
       .then((res) => {
         
         setLoading(false);
         history.push("/");
       })
-      .catch((err) => {
+      .catch(err => {
         setError(err.message || err);
         setLoading(false);
       });
@@ -36,7 +37,7 @@ function Login() {
 
   return (
     <Container>
-      <Header>Login</Header>
+      <Header>SignUp</Header>
       {error && <MessageLoader danger message={error} />}
       <Form onSubmit={handlesubmit}>
         <Form.Field>
@@ -61,9 +62,18 @@ function Login() {
           <label>Password</label>
           <input
             placeholder="Enter Password"
-            value={password}
+            value={password1}
             type="password"
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e) => setPassword1(e.target.value)}
+          />
+        </Form.Field>
+        <Form.Field>
+          <label>Confirm Password</label>
+          <input
+            placeholder="Enter Password"
+            value={password2}
+            type="password"
+            onChange={(e) => setPassword2(e.target.value)}
           />
         </Form.Field>
         <Button fluid type="submit" color="blue" loading={loading}>
@@ -74,4 +84,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Signup;
