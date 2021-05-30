@@ -1,8 +1,7 @@
-import { Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import PostList from "./Containers/PostList";
 import 'semantic-ui-css/semantic.min.css';
 import Layout from "./Containers/Layout";
-import PostDelete from "./Containers/PostDelete";
 import PostDetail from "./Containers/PostDetail";
 import PostCreate from "./Containers/PostCreate";
 import PostUpdate from "./Containers/PostUpdate";
