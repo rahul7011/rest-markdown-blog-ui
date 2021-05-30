@@ -7,6 +7,7 @@ import PostDetail from "./Containers/PostDetail";
 import PostCreate from "./Containers/PostCreate";
 import PostUpdate from "./Containers/PostUpdate";
 import {history} from "./helpers/history"
+import Login from "./Containers/Login";
 
 function App() {
   return (
@@ -17,7 +18,8 @@ function App() {
           <Route path="/create" component={PostCreate} />
           <Route exact path="/posts/:postSlug" component={PostDetail} />
           <Route path="/posts/:postSlug/update" component={PostUpdate} />
-          <Route path="/posts/:postSlug/delete" component={PostDelete} />
+          <Route path="/login" component={Login} />
+          
         </Switch>
       </Layout>
     </Router>

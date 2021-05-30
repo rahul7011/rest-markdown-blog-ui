@@ -4,10 +4,10 @@ import { Button, Divider, Header, Image, Modal } from "semantic-ui-react";
 import Loadingicon from "../Components/Loadingicon";
 import MessageLoader from "../Components/MessageLoader";
 import { api } from "../api";
-import axios from "axios";
 import {history} from "../helpers/history";
 import useFetch from "../helpers/hooks";
 import ReactMarkdown from 'react-markdown'
+import authAxios from "../Services/AuthenticationServices";
 
 function DeleteModal({ title, thumbnail,postSlug}) {
 
@@ -17,11 +17,10 @@ function DeleteModal({ title, thumbnail,postSlug}) {
   function handlesubmit() {
     setLoading(true);
 
-    axios
+    authAxios
       .delete(api.posts.delete(postSlug),{
         headers: {
           "Content-Type": "multipart/form-data",
-          Authorization: "Token 8db098e5de5cd35f7cba9bca44bb680547cb3ad5",
         },
       })
       .then((res) => {

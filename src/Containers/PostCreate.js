@@ -7,6 +7,7 @@ import MessageLoader from "../Components/MessageLoader";
 import MarkdownIt from "markdown-it";
 import MdEditor from "react-markdown-editor-lite";
 import "react-markdown-editor-lite/lib/index.css";
+import authAxios from "../Services/AuthenticationServices";
 
 const PostCreate = () => {
   const [loading, setLoading] = useState(false);
@@ -27,11 +28,10 @@ const PostCreate = () => {
     formData.append("title", title);
     formData.append("content", markdown);
 
-    axios
+    authAxios
       .post(api.posts.create, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
-          Authorization: "Token 8db098e5de5cd35f7cba9bca44bb680547cb3ad5",
         },
       })
       .then((res) => {
