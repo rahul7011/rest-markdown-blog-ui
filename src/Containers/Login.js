@@ -1,8 +1,6 @@
-import axios from "axios";
 import React, { useState } from "react";
 import { Redirect } from "react-router";
 import { Container, Form, Header, Button } from "semantic-ui-react";
-import { api } from "../api";
 import MessageLoader from "../Components/MessageLoader";
 import { history } from "../helpers/history";
 import { AuthenticationService } from "../Services/AuthenticationServices";
@@ -18,14 +16,9 @@ function Login() {
   const handlesubmit = (e) => {
     setLoading(true);
     e.preventDefault();
-    axios
-      .post(api.auth.login, {
-        username,
-        email,
-        password,
-      })
+    AuthenticationService.login({username,email,password})
       .then((res) => {
-        localStorage.setItem("token", res.data.key);    //saving it to the local storage
+        
         setLoading(false);
         history.push("/");
       })

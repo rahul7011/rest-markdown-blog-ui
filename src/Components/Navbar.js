@@ -17,20 +17,26 @@ const Navbar = () => {
             <Menu.Item as="li">Posts</Menu.Item>
           </NavLink>
           {AuthenticationService.isAuthenticated ? (
-            <Dropdown text='Profile' pointing className='link item'>
-            <Dropdown.Menu>
-              <Dropdown.Header>Profile</Dropdown.Header>
-              <Dropdown.Item onClick={() => AuthenticationService.logout()}>Logout</Dropdown.Item>
-            </Dropdown.Menu>
-          </Dropdown>
+            <>
+              <Dropdown text="Profile" pointing className="link item">
+                <Dropdown.Menu>
+                  <Dropdown.Header>Profile</Dropdown.Header>
+                  <Dropdown.Item onClick={() => AuthenticationService.logout()}>
+                    Logout
+                  </Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
+              <NavLink to="/create">
+                <Menu.Item as="li">Create a post</Menu.Item>
+              </NavLink>
+            </>
           ) : (
-            <NavLink to="/login">
-              <Menu.Item as="li">logIn</Menu.Item>
-            </NavLink>
+            <>
+              <NavLink to="/login">
+                <Menu.Item as="li">logIn</Menu.Item>
+              </NavLink>
+            </>
           )}
-          <NavLink to="/create">
-            <Menu.Item as="li">Create a post</Menu.Item>
-          </NavLink>
         </Container>
       </Menu>
     </div>
