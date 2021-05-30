@@ -7,6 +7,7 @@ import { api } from "../api";
 import axios from "axios";
 import {history} from "../helpers/history";
 import useFetch from "../helpers/hooks";
+import ReactMarkdown from 'react-markdown'
 
 function DeleteModal({ title, thumbnail,postSlug}) {
 
@@ -92,7 +93,9 @@ const PostDetail = () => {
             </small>
           </strong>
           <br />
+          <ReactMarkdown>
           {data.content}
+          </ReactMarkdown>
           <Divider />
           <DeleteModal
             title={data.title}
