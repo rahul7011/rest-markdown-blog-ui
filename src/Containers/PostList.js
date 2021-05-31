@@ -6,6 +6,7 @@ import Loadingicon from "../Components/Loadingicon";
 import MessageLoader from "../Components/MessageLoader";
 import useFetch from "../helpers/hooks";
 import ReactMarkdown from "react-markdown";
+import Truncate from 'react-truncate';
 const PostList = () => {
   const { data, loading, error } = useFetch(api.posts.list);
   return (
@@ -25,7 +26,11 @@ const PostList = () => {
                   <Item.Header as="h3">{post.title}</Item.Header>
                 </NavLink>
                 <>
+
+                <Truncate lines={3} ellipsis={<span>... <a href={`/posts/${post.slug}`}>Read more</a></span>}>
                   <ReactMarkdown>{post.content}</ReactMarkdown>
+                </Truncate>
+
                 </>
               </Item.Content>
             </Item>
