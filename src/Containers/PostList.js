@@ -5,6 +5,7 @@ import { api } from "../api";
 import Loadingicon from "../Components/Loadingicon";
 import MessageLoader from "../Components/MessageLoader";
 import useFetch from "../helpers/hooks";
+import ReactMarkdown from "react-markdown";
 const PostList = () => {
   const { data, loading, error } = useFetch(api.posts.list);
   return (
@@ -23,7 +24,9 @@ const PostList = () => {
                 <NavLink to={`/posts/${post.slug}`}>
                   <Item.Header as="h3">{post.title}</Item.Header>
                 </NavLink>
-                <Item.Description>{post.content}</Item.Description>
+                <>
+                  <ReactMarkdown>{post.content}</ReactMarkdown>
+                </>
               </Item.Content>
             </Item>
           );
